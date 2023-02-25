@@ -11,7 +11,7 @@ class SignupScreen extends StatelessWidget {
   GlobalKey<FormState> Sign_Form_Key = GlobalKey<FormState>();
   TextEditingController Sign_Company_Controller = TextEditingController();
   TextEditingController Sign_Email_Controller = TextEditingController();
-  TextEditingController Sign_Phone_Controller = TextEditingController();
+  TextEditingController Sign_phone_Controller = TextEditingController();
   TextEditingController Sign_Password_Controller = TextEditingController();
 
   @override
@@ -19,9 +19,12 @@ class SignupScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
-            child: Column(
-                  children: [
-            Image.asset(Logo,height: 250,),
+        child: Column(
+          children: [
+            Image.asset(
+              logo,
+              height: 250,
+            ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Form(
@@ -47,8 +50,8 @@ class SignupScreen extends StatelessWidget {
                         decoration: new InputDecoration(
                           hintText: 'Company',
                           counterText: "",
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 16),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(color: maroon, width: 2.0),
@@ -105,8 +108,8 @@ class SignupScreen extends StatelessWidget {
                         decoration: new InputDecoration(
                           hintText: 'Email',
                           counterText: "",
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 16),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(color: maroon, width: 2.0),
@@ -152,7 +155,7 @@ class SignupScreen extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: 20),
                       child: TextFormField(
-                        controller: Sign_Phone_Controller,
+                        controller: Sign_phone_Controller,
                         maxLength: 11,
                         keyboardType: TextInputType.number,
                         style: TextStyle(
@@ -163,8 +166,8 @@ class SignupScreen extends StatelessWidget {
                         decoration: new InputDecoration(
                           hintText: 'Mobile Number',
                           counterText: "",
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 16),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(color: maroon, width: 2.0),
@@ -215,7 +218,8 @@ class SignupScreen extends StatelessWidget {
                           obscureText: value.visible,
                           controller: Sign_Password_Controller,
                           style: TextStyle(
-                              fontSize: 18, color: Color.fromARGB(186, 0, 0, 0)),
+                              fontSize: 18,
+                              color: Color.fromARGB(186, 0, 0, 0)),
                           decoration: new InputDecoration(
                             hintText: 'Password',
                             contentPadding: EdgeInsets.symmetric(
@@ -280,10 +284,7 @@ class SignupScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginScreen()));
+                              Navigator.pop(context);
                             },
                             child: Text(
                               "Login",
@@ -297,8 +298,8 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      decoration:
-                          BoxDecoration(borderRadius: BorderRadius.circular(30)),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30)),
                       // gradient: LinearGradient(
                       //     colors: [itemGradient2, itemGradient1])),
                       child: ElevatedButton(
@@ -313,7 +314,7 @@ class SignupScreen extends StatelessWidget {
                             // Sign_Api_Func(
                             //     context,
                             //     Sign_Form_Key,
-                            //     Sign_Phone_Controller.text.toString(),
+                            //     Sign_phone_Controller.text.toString(),
                             //     Sign_Password_Controller.text.toString());
                           },
                           child: Padding(
@@ -329,9 +330,9 @@ class SignupScreen extends StatelessWidget {
                 ),
               ),
             )
-                  ],
-                ),
-          )),
+          ],
+        ),
+      )),
     );
   }
 }

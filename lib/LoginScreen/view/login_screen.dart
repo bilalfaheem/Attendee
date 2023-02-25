@@ -1,5 +1,7 @@
 import 'package:attendees/LoginScreen/provider/login_password_provider.dart';
+import 'package:attendees/NavBarScreen/view/navbar_screen.dart';
 import 'package:attendees/ProfileScreen/view/profile_screen.dart';
+import 'package:attendees/SelectionScreen/view/selection_screen.dart';
 import 'package:attendees/SignupScreen/view/signup_screen.dart';
 import 'package:attendees/Utils/colors.dart';
 import 'package:attendees/Utils/images.dart';
@@ -8,9 +10,10 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
+  bool company;
+  LoginScreen({required this.company});
   GlobalKey<FormState> Login_Form_Key = GlobalKey<FormState>();
-  TextEditingController Login_Phone_Controller = TextEditingController();
+  TextEditingController Login_phone_Controller = TextEditingController();
   TextEditingController Login_Password_Controller = TextEditingController();
 
   @override
@@ -20,7 +23,7 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset(Logo),
+            Image.asset(logo),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Form(
@@ -33,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                       height: 35,
                     ),
                     TextFormField(
-                      controller: Login_Phone_Controller,
+                      controller: Login_phone_Controller,
                       maxLength: 11,
                       keyboardType: TextInputType.number,
                       style: TextStyle(
@@ -148,35 +151,40 @@ class LoginScreen extends StatelessWidget {
                         ),
                       );
                     }),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 30),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Create an account  ",
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Color.fromARGB(170, 0, 0, 0)),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignupScreen()));
-                            },
-                            child: Text(
-                              "SignUp",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: maroon),
+                    company
+                        ? Container(
+                            margin: EdgeInsets.only(bottom: 30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Create an account  ",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Color.fromARGB(170, 0, 0, 0)),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignupScreen()));
+                                  },
+                                  child: Text(
+                                    "SignUp",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        color: maroon),
+                                  ),
+                                )
+                              ],
                             ),
                           )
-                        ],
-                      ),
-                    ),
+                        : Container(
+                            height: 60,
+                          ),
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30)),
@@ -194,11 +202,11 @@ class LoginScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ProfileScreen()));
+                                    builder: (context) => NavBarScreen()));
                             // Login_Api_Func(
                             //     context,
                             //     Login_Form_Key,
-                            //     Login_Phone_Controller.text.toString(),
+                            //     Login_phone_Controller.text.toString(),
                             //     Login_Password_Controller.text.toString());
                           },
                           child: Padding(

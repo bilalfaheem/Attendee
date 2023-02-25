@@ -9,10 +9,9 @@ Widget ProfileTile() {
     child: ListTile(
       horizontalTitleGap: 10,
       selected: false,
-      contentPadding: EdgeInsets.symmetric(
-          horizontal: 15, vertical: 3),
+      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
       leading: Image.asset(
-        Phone,
+        phone,
         color: maroon,
         height: 30,
       ),

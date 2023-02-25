@@ -13,18 +13,15 @@ class ProfileScreen extends StatelessWidget {
       body: SafeArea(
           child: Column(
         children: [
-          Image.asset(Logo,height: 200,),
+          Image.asset(
+            logo,
+            height: 200,
+          ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 30),
-            child: 
-          Column(
-            children: [
-              ProfileTile(),
-              ProfileTile()
-            ],
-          )
-          )
-        
+              margin: EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                children: [ProfileTile(), ProfileTile()],
+              ))
         ],
       )),
     );

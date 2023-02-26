@@ -1,5 +1,6 @@
 import 'package:attendees/LoginScreen/provider/login_password_provider.dart';
 import 'package:attendees/NavBarScreen/view/navbar_screen.dart';
+import 'package:attendees/NavBarScreen/view/office_navbar_screen.dart';
 import 'package:attendees/ProfileScreen/view/profile_screen.dart';
 import 'package:attendees/SelectionScreen/view/selection_screen.dart';
 import 'package:attendees/SignupScreen/view/signup_screen.dart';
@@ -23,7 +24,9 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset(logo),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 50),
+              child: Image.asset(logo,height: 250,)),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Form(
@@ -161,7 +164,7 @@ class LoginScreen extends StatelessWidget {
                                   "Create an account  ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Color.fromARGB(170, 0, 0, 0)),
+                                      color: greyColor),
                                 ),
                                 GestureDetector(
                                   onTap: () {
@@ -169,14 +172,14 @@ class LoginScreen extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                SignupScreen()));
+                                                OfficeNavBarScreen()));
                                   },
                                   child: Text(
                                     "SignUp",
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500,
-                                        color: maroon),
+                                        color: primaryColorDark),
                                   ),
                                 )
                               ],
@@ -192,7 +195,7 @@ class LoginScreen extends StatelessWidget {
                       //     colors: [itemGradient2, itemGradient1])),
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(166, 0, 0, 0),
+                              primary:primaryColorDark,
                               // shadowColor: Colors.transparent,
                               // onPrimary: itemGradient1Light,
                               // animationDuration: defaultAnimationDelay,

@@ -16,20 +16,30 @@ class SelectionScreen extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(logo),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 50),
+                child: Image.asset("assets/logo/logo.png",height: 250,)),
+            ],
+          ),
+          
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(30)),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(166, 0, 0, 0),
+                          primary:primaryColorDark,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30))),
                       onPressed: () {
@@ -58,7 +68,7 @@ class SelectionScreen extends StatelessWidget {
                   //     colors: [itemGradient2, itemGradient1])),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(166, 0, 0, 0),
+                          primary: primaryColorDark,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30))),
                       onPressed: () {

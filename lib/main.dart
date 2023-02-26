@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (_) => LoginPasswordVisibilityProvider()),
           ChangeNotifierProvider(create: (_) => SignupPasswordVisibilityProvider()),
-          ChangeNotifierProvider(create: (_) => NavbarProvider())
+          ChangeNotifierProvider(create: (_) => NavbarProvider()),
+          ChangeNotifierProvider(create: (_)=>OfficeNavbarProvider())
         ],
         child: Builder(builder: (BuildContext context) {
           return MaterialApp(

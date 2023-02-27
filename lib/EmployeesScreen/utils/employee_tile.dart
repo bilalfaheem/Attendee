@@ -8,7 +8,7 @@ Widget employeeTile(context,String name) {
   return GestureDetector(
     onTap: () {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => EmployeeDetailScreeb()));
+          MaterialPageRoute(builder: (context) => EmployeeDetailScreen(name: name, email: "email", password: "password")));
     },
     child: Container(
       margin: EdgeInsets.only(right: 15, left: 15, bottom: 10),
@@ -23,7 +23,7 @@ Widget employeeTile(context,String name) {
             children: [
               Container(
                   margin: EdgeInsets.only(right: 8, left: 8),
-                  padding: EdgeInsets.all(12),
+                  padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
                       shape: BoxShape.circle, color: Colors.white),
                   child: Text(

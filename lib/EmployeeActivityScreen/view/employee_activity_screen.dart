@@ -19,26 +19,72 @@ class EmployeeActivityScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => QrScreen()));
-                },
-                child: Container(
-                  margin: EdgeInsets.only(top: 20),
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                      color: primaryColorLight,
-                      borderRadius: BorderRadius.circular(30)),
-                  child: PrettyQr(
-                    elementColor: primaryColorDark,
-                    // image: AssetImage(logo),
-                    size: 80,
-                    data: 'https://www.google.ru',
-                    errorCorrectLevel: QrErrorCorrectLevel.M,
-                    roundEdges: true,
+              Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => QrScreen()));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top: 20,bottom: 7),
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          color: primaryColorLight,
+                          borderRadius: BorderRadius.circular(30)),
+                      child: PrettyQr(
+                        elementColor: primaryColorDark,
+                        // image: AssetImage(logo),
+                        size: 80,
+                        data: 'https://www.google.ru',
+                        errorCorrectLevel: QrErrorCorrectLevel.M,
+                        roundEdges: true,
+                      ),
+                    ),
+                    
                   ),
-                ),
+                  Center(
+                      child: Container(
+                        // margin: EdgeInsets.only(top: 30),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30)),
+                        child: ElevatedButton(
+                          
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                                primary: primaryColorDark,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30))),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          QrScreen()));
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 27),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text("  Qr  ",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white)),
+                                          // Container(
+                                          //   decoration: BoxDecoration(
+                                          //     color: primaryColorLight,
+                                          //     shape: BoxShape.circle,
+                                          //   ),child: Center(child: Icon(Icons.add,color: primaryColorDark,)),
+                                          // )
+                                ],
+                              ),
+                            )),
+                      ),
+                    )
+                ],
               ),
             ],
           ),

@@ -41,13 +41,13 @@ Widget officeNavBar(context) {
                   child: Row(
                     children: [
                       Image.asset(
-                        home,
+                        activities,
                         color:
                             value.screen == 0 ? Colors.white : primaryColorDark,
                         height: 20,
                       ),
                       Text(
-                        "  Home",
+                        "  Activity",
                         style: TextStyle(
                             color: value.screen == 0
                                 ? Colors.white
@@ -75,13 +75,13 @@ Widget officeNavBar(context) {
                   child: Row(
                     children: [
                       Image.asset(
-                        profile,
+                        employees,
                         color:
                             value.screen == 1 ? Colors.white : primaryColorDark,
-                        height: 20,
+                        height: 24,
                       ),
                       Text(
-                        "  Profile",
+                        "  Team",
                         style: TextStyle(
                             color: value.screen == 1
                                 ? Colors.white
@@ -109,7 +109,7 @@ Widget officeNavBar(context) {
                   child: Row(
                     children: [
                       Image.asset(
-                        profile,
+                        office,
                         color:
                             value.screen == 2 ? Colors.white : primaryColorDark,
                         height: 20,

@@ -38,12 +38,12 @@ class QrScreen extends StatelessWidget {
                       children: [
                         Container(
                           width: 240,
-                                   margin: EdgeInsets.only(top: 20),
+                                   margin: EdgeInsets.only(top: 20,bottom: 40),
                                   padding: EdgeInsets.symmetric(vertical: 15,horizontal: 20),
                                   decoration: BoxDecoration(
-                                      color: primaryColorLight,
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: Center(child: Text("Company Name",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20,color: primaryColorDark),))
+                                      color: primaryColorDark,
+                                      borderRadius: BorderRadius.circular(25)),
+                                  child: Center(child: Text("Company Name",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20,color: Colors.white),))
                                 ),
                       ],
                     ),

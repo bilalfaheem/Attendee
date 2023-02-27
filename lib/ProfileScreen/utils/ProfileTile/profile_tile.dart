@@ -3,7 +3,8 @@ import 'package:attendees/Utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-Widget ProfileTile() {
+
+Widget ProfileTile(image,text) {
   return Container(
     margin: EdgeInsets.only(top: 15),
     child: ListTile(
@@ -11,12 +12,12 @@ Widget ProfileTile() {
       selected: false,
       contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
       leading: Image.asset(
-        phone,
-        color: maroon,
-        height: 30,
+        image,
+        color: primaryColorDark,
+        height:image == phone?24:image== profile? 22: image == office?24: 30,
       ),
       title: Text(
-        "Company Name",
+        text.toString(),
         // Single_User_List[0].ownerCnic.toString(),
 
         // User_login_Cnic,
@@ -28,7 +29,7 @@ Widget ProfileTile() {
         //     fontSize: _size.height * 0.025, color: Colors.black)
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-      tileColor: highlightLightGrey,
+      tileColor: primaryColorLight,
     ),
   );
 }

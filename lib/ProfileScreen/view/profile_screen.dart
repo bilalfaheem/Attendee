@@ -1,4 +1,5 @@
 import 'package:attendees/ProfileScreen/utils/ProfileTile/profile_tile.dart';
+import 'package:attendees/Utils/colors.dart';
 import 'package:attendees/Utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -13,15 +14,49 @@ class ProfileScreen extends StatelessWidget {
       body: SafeArea(
           child: Column(
         children: [
-          Image.asset(
-            logo,
-            height: 200,
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 45),
+            child: Image.asset(
+              logo,
+              height: 170,
+            ),
           ),
           Container(
               margin: EdgeInsets.symmetric(horizontal: 30),
               child: Column(
-                children: [ProfileTile(), ProfileTile()],
-              ))
+                children: [ProfileTile(profile," Name"),ProfileTile(office,"Company Name"), ProfileTile(email,"email"),ProfileTile(phone, "Phone")],
+              )),
+               Center(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 30),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30)),
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: primaryColorDark,
+                                // shadowColor: Colors.transparent,
+                                // onPrimary: itemGradient1Light,
+                                // animationDuration: defaultAnimationDelay,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30))),
+                            onPressed: () {
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             EmployeeActivityScreen()));
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 14, horizontal: 50),
+                              child: Text("Logout",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white)),
+                            )),
+                      ),
+                    )
         ],
       )),
     );

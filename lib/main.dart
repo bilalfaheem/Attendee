@@ -1,3 +1,4 @@
+import 'package:attendees/EmployeeDetailScreen/provider/employee_detail_provider.dart';
 import 'package:attendees/LoginScreen/provider/login_password_provider.dart';
 import 'package:attendees/NavBarScreen/provider/navbar_provider.dart';
 import 'package:attendees/SelectionScreen/view/selection_screen.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => LoginPasswordVisibilityProvider()),
           ChangeNotifierProvider(create: (_) => SignupPasswordVisibilityProvider()),
           ChangeNotifierProvider(create: (_) => NavbarProvider()),
-          ChangeNotifierProvider(create: (_)=>OfficeNavbarProvider())
+          ChangeNotifierProvider(create: (_)=>OfficeNavbarProvider()),
+          ChangeNotifierProvider(create: (_)=>EmployeeDetailProvider())
         ],
         child: Builder(builder: (BuildContext context) {
           return MaterialApp(

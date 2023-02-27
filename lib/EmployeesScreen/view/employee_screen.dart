@@ -24,7 +24,7 @@ class EmployeeScreen extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => QrScreen()));
+                      MaterialPageRoute(builder: (context) => AddEmployeeScreen()));
                 },
                 child: Container(
                 margin: EdgeInsets.only(top: 20),

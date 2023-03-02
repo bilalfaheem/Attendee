@@ -1,4 +1,5 @@
 import 'package:attendees/LoginScreen/view/login_screen.dart';
+import 'package:attendees/SignupScreen/function/signup_func.dart';
 import 'package:attendees/SignupScreen/provider/signup_password_provider.dart';
 import 'package:attendees/Utils/colors.dart';
 import 'package:attendees/Utils/images.dart';
@@ -8,11 +9,11 @@ import 'package:provider/provider.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({Key? key}) : super(key: key);
-  GlobalKey<FormState> Sign_Form_Key = GlobalKey<FormState>();
-  TextEditingController Sign_Company_Controller = TextEditingController();
-  TextEditingController Sign_Email_Controller = TextEditingController();
-  TextEditingController Sign_phone_Controller = TextEditingController();
-  TextEditingController Sign_Password_Controller = TextEditingController();
+  GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
+  TextEditingController signupNameController = TextEditingController();
+  TextEditingController signupEmailController = TextEditingController();
+  TextEditingController signupPhoneController = TextEditingController();
+  TextEditingController signupPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class SignupScreen extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Form(
-                key: Sign_Form_Key,
+                key: signUpFormKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -42,13 +43,13 @@ class SignupScreen extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: 20),
                       child: TextFormField(
-                        controller: Sign_Company_Controller,
-                        maxLength: 11,
-                        keyboardType: TextInputType.number,
+                        controller: signupNameController,
+                        maxLength: 15,
                         style: TextStyle(
                             fontSize: 18, color: Color.fromARGB(186, 0, 0, 0)),
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.allow(
+                              RegExp("[a-zA-Z0-9-]"))
                         ],
                         decoration: new InputDecoration(
                           hintText: 'Company',
@@ -57,7 +58,8 @@ class SignupScreen extends StatelessWidget {
                               horizontal: 20, vertical: 16),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(color: maroon, width: 2.0),
+                            borderSide:
+                                BorderSide(color: primaryColorDark, width: 2.0),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -79,35 +81,34 @@ class SignupScreen extends StatelessWidget {
                           // errorStyle: InputDecoration.collapsed(hintText: hintText)
                         ),
                         validator: (value) {
-                          // if (Sign_Api_Validation == false) {
-                          //   if (value == null || value.isEmpty)
-                          //     return "Enter Mobile Number";
-                          //   else if (value.length < 11) {
-                          //     return "Enter Correct Number";
-                          //   } else {
-                          //     return null;
-                          //   }
-                          // } else if (Sign_Api_Validation == true) {
-                          //   if (Sign_Api_Status == "404") {
-                          //     return "Failed";
-                          //   } else if (Sign_Api_Status == "200") {
-                          //     return null;
-                          //   }
-                          // }
+                          if (signupApiValidation == false) {
+                            if (value == null || value.isEmpty)
+                              return "Company Name";
+                            else if (value.length < 3) {
+                              return "Company Name";
+                            } else {
+                              return null;
+                            }
+                          } else if (signupApiValidation == true) {
+                            if (signupApiStatus == "4") {
+                              return "Name Already Exist";
+                            } else if (signupApiStatus == "1") {
+                              return null;
+                            }
+                          }
                         },
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 20),
                       child: TextFormField(
-                        controller: Sign_Email_Controller,
-                        maxLength: 11,
-                        keyboardType: TextInputType.number,
+                        controller: signupEmailController,
                         style: TextStyle(
                             fontSize: 18, color: Color.fromARGB(186, 0, 0, 0)),
-                        // inputFormatters: <TextInputFormatter>[
-                        //   FilteringTextInputFormatter.digitsOnly
-                        // ],
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                              RegExp("[a-zA-Z0-9!#@%&*+-/=?^_`{|}~]"))
+                        ],
                         decoration: new InputDecoration(
                           hintText: 'Email',
                           counterText: "",
@@ -115,7 +116,8 @@ class SignupScreen extends StatelessWidget {
                               horizontal: 20, vertical: 16),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(color: maroon, width: 2.0),
+                            borderSide:
+                                BorderSide(color: primaryColorDark, width: 2.0),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -137,28 +139,32 @@ class SignupScreen extends StatelessWidget {
                           // errorStyle: InputDecoration.collapsed(hintText: hintText)
                         ),
                         validator: (value) {
-                          // if (Sign_Api_Validation == false) {
-                          //   if (value == null || value.isEmpty)
-                          //     return "Enter Mobile Number";
-                          //   else if (value.length < 11) {
-                          //     return "Enter Correct Number";
-                          //   } else {
-                          //     return null;
-                          //   }
-                          // } else if (Sign_Api_Validation == true) {
-                          //   if (Sign_Api_Status == "404") {
-                          //     return "Failed";
-                          //   } else if (Sign_Api_Status == "200") {
-                          //     return null;
-                          //   }
-                          // }
+                          if (signupApiValidation == false) {
+                            if (value == null || value.isEmpty) {
+                              return "Enter Email";
+                            } else if (value.length < 7) {
+                              return "Enter Email";
+                            } else {
+                              return null;
+                            }
+                          } else if (signupApiValidation == true) {
+                            if (signupApiStatus == "0") {
+                              return "failed";
+                            } else if (signupApiStatus == "1") {
+                              return null;
+                            } else if (signupApiStatus == "2") {
+                              return "Email Already Exist";
+                            } else {
+                              return null;
+                            }
+                          }
                         },
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 20),
                       child: TextFormField(
-                        controller: Sign_phone_Controller,
+                        controller: signupPhoneController,
                         maxLength: 11,
                         keyboardType: TextInputType.number,
                         style: TextStyle(
@@ -167,13 +173,14 @@ class SignupScreen extends StatelessWidget {
                           FilteringTextInputFormatter.digitsOnly
                         ],
                         decoration: new InputDecoration(
-                          hintText: 'Mobile Number',
+                          hintText: 'Contact Number',
                           counterText: "",
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 20, vertical: 16),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(color: maroon, width: 2.0),
+                            borderSide:
+                                BorderSide(color: primaryColorDark, width: 2.0),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -195,21 +202,21 @@ class SignupScreen extends StatelessWidget {
                           // errorStyle: InputDecoration.collapsed(hintText: hintText)
                         ),
                         validator: (value) {
-                          // if (Sign_Api_Validation == false) {
-                          //   if (value == null || value.isEmpty)
-                          //     return "Enter Mobile Number";
-                          //   else if (value.length < 11) {
-                          //     return "Enter Correct Number";
-                          //   } else {
-                          //     return null;
-                          //   }
-                          // } else if (Sign_Api_Validation == true) {
-                          //   if (Sign_Api_Status == "404") {
-                          //     return "Failed";
-                          //   } else if (Sign_Api_Status == "200") {
-                          //     return null;
-                          //   }
-                          // }
+                          if (signupApiValidation == false) {
+                            if (value == null || value.isEmpty)
+                              return "Contact Number";
+                            else if (value.length < 11) {
+                              return "Contact Number";
+                            } else {
+                              return null;
+                            }
+                          } else if (signupApiValidation == true) {
+                            if (signupApiStatus == "0") {
+                              return "failed";
+                            } else if (signupApiStatus == "1") {
+                              return null;
+                            }
+                          }
                         },
                       ),
                     ),
@@ -219,7 +226,7 @@ class SignupScreen extends StatelessWidget {
                         margin: EdgeInsets.only(top: 20, bottom: 20),
                         child: TextFormField(
                           obscureText: value.visible,
-                          controller: Sign_Password_Controller,
+                          controller: signupPasswordController,
                           style: TextStyle(
                               fontSize: 18,
                               color: Color.fromARGB(186, 0, 0, 0)),
@@ -236,7 +243,8 @@ class SignupScreen extends StatelessWidget {
                                     : Icon(Icons.visibility)),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: maroon, width: 2.0),
+                              borderSide: BorderSide(
+                                  color: primaryColorDark, width: 2.0),
                             ),
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -257,19 +265,19 @@ class SignupScreen extends StatelessWidget {
                             ),
                           ),
                           validator: (value) {
-                            // if (Sign_Api_Validation == false) {
-                            //   if (value == null || value.isEmpty)
-                            //     return "Enter Password";
-                            //   else {
-                            //     return null;
-                            //   }
-                            // } else if (Sign_Api_Validation == true) {
-                            //   if (Sign_Api_Status == "404") {
-                            //     return "Failed";
-                            //   } else if (Sign_Api_Status == "200") {
-                            //     return null;
-                            //   }
-                            // }
+                            if (signupApiValidation == false) {
+                              if (value == null || value.isEmpty)
+                                return "Enter Password";
+                              else {
+                                return null;
+                              }
+                            } else if (signupApiValidation == true) {
+                              if (signupApiStatus == "0") {
+                                return "failed";
+                              } else if (signupApiStatus == "1") {
+                                return null;
+                              }
+                            }
                           },
                         ),
                       );
@@ -281,9 +289,7 @@ class SignupScreen extends StatelessWidget {
                         children: [
                           Text(
                             "Already have an account  ",
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: greyColor),
+                            style: TextStyle(fontSize: 18, color: greyColor),
                           ),
                           GestureDetector(
                             onTap: () {
@@ -314,11 +320,13 @@ class SignupScreen extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30))),
                           onPressed: () {
-                            // Sign_Api_Func(
-                            //     context,
-                            //     Sign_Form_Key,
-                            //     Sign_phone_Controller.text.toString(),
-                            //     Sign_Password_Controller.text.toString());
+                            signupFunction(
+                                context,
+                                signUpFormKey,
+                                signupNameController.text.toString(),
+                                signupEmailController.text.toString(),
+                                signupPhoneController.text.toString(),
+                                signupPasswordController.text.toString());
                           },
                           child: Padding(
                             padding: EdgeInsets.all(14),

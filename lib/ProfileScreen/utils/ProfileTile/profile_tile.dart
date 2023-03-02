@@ -3,8 +3,7 @@ import 'package:attendees/Utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-
-Widget ProfileTile(image,text) {
+Widget ProfileTile(image, text) {
   return Container(
     margin: EdgeInsets.only(top: 15),
     child: ListTile(
@@ -14,7 +13,13 @@ Widget ProfileTile(image,text) {
       leading: Image.asset(
         image,
         color: primaryColorDark,
-        height:image == phone?24:image== profile? 22: image == office?24: 30,
+        height: image == phone
+            ? 24
+            : image == profile
+                ? 22
+                : image == office
+                    ? 24
+                    : 30,
       ),
       title: Text(
         text.toString(),

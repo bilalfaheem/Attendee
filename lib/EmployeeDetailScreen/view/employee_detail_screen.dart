@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 
 class EmployeeDetailScreen extends StatelessWidget {
   String name, email, password;
-  EmployeeDetailScreen({required this.name,required this.email,required this.password});
+  EmployeeDetailScreen(
+      {required this.name, required this.email, required this.password});
 
   @override
   Widget build(BuildContext context) {

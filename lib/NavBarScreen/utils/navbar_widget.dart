@@ -57,7 +57,7 @@ Widget navBar(context) {
                   ),
                 ),
               ),
-             GestureDetector(
+              GestureDetector(
                 onTap: () {
                   value.changeScreen(1);
                 },

@@ -2,6 +2,7 @@ import 'package:attendees/EmployeeActivityScreen/utils/employee_activity_tile.da
 import 'package:attendees/MarkAttendenceScreen/utils/markattendence_tile.dart';
 import 'package:attendees/QrScreen/view/qr_screen.dart';
 import 'package:attendees/Utils/colors.dart';
+import 'package:attendees/Utils/constant.dart';
 import 'package:attendees/Utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
@@ -36,7 +37,7 @@ class EmployeeActivityScreen extends StatelessWidget {
                         elementColor: primaryColorDark,
                         // image: AssetImage(logo),
                         size: 80,
-                        data: 'https://www.google.ru',
+                        data: attendeesQr,
                         errorCorrectLevel: QrErrorCorrectLevel.M,
                         roundEdges: true,
                       ),
@@ -100,9 +101,192 @@ class EmployeeActivityScreen extends StatelessWidget {
               ),
             ],
           ),
-          employeeActivityTile(true)
+          
+          employeeActivityTile(true),
+          // FutureBuilder(
+          //                 future: getReview(detailList.id.toString()),
+          //                 builder: (context, snapshot) {
+          //                   if (snapshot.connectionState ==
+          //                       ConnectionState.waiting) {
+          //                     return Column(
+          //                       mainAxisAlignment: MainAxisAlignment.center,
+          //                       crossAxisAlignment: CrossAxisAlignment.center,
+          //                       children: [
+          //                         SizedBox(
+          //                           height: 200,
+          //                         ),
+          //                         Center(
+          //                             child: CircularProgressIndicator(
+          //                           strokeWidth: 1.5,
+          //                           color: primaryColorDark,
+          //                         ))
+          //                       ],
+          //                     );
+          //                   } else if (snapshot.hasData) {
+          //                     return Column(children: [
+          //                       totalRating == null
+          //                           ? Container(
+          //                               margin: EdgeInsets.symmetric(
+          //                                   vertical: 20, horizontal: 10),
+          //                               padding: EdgeInsets.symmetric(
+          //                                   vertical: 18, horizontal: 20),
+          //                               decoration: BoxDecoration(
+          //                                   borderRadius:
+          //                                       BorderRadius.circular(25),
+          //                                   color: primaryColorDark),
+          //                               child: Text("No Review Yet",
+          //                                   style: TextStyle(
+          //                                       // fontSize: constraints.maxHeight * 0.09,
+          //                                       color: greyTextColor)),
+          //                             )
+          //                           : ratingCard(
+          //                               size, totalRating, reviewList.length),
+          //                       ListView.builder(
+          //                           padding: EdgeInsets.zero,
+          //                           physics: NeverScrollableScrollPhysics(),
+          //                           shrinkWrap: true,
+          //                           itemCount: reviewList.length,
+          //                           reverse: true,
+          //                           // detailList.reviews?.length,
+          //                           itemBuilder: (BuildContext context, int i) {
+          //                             return reviewCard(
+          //                                 size,
+          //                                 reviewList[i].name,
+          //                                 reviewList[i].rating,
+          //                                 reviewList[i].text);
+          //                           }),
+          //                     ]);
+          //                   } else {
+          //                     return Container();
+          //                   }
+          //                 }),
         ],
       )),
     );
   }
 }
+
+
+// [
+//   {
+//     activity_date:"2023-03-02",
+//     activity_list: [
+//             {
+//                 "id": "1",
+//                 "status": "checkin",
+//                 "is_late": "0",
+//                 "user_id": "1",
+//                 "date": "2023-03-02",
+//                 "time": "22:31:20",
+//                 "created_at": "2022-12-11 18:09:24",
+//                 "company_id": "1",
+//                 "name": "test",
+//                 "email": "test@gmail.com",
+//                 "phone": "123456789",
+//                 "password": "123"
+//             },
+//             {
+//                 "id": "1",
+//                 "status": "breakin",
+//                 "is_late": "0",
+//                 "user_id": "1",
+//                 "date": "2023-03-02",
+//                 "time": "22:31:20",
+//                 "created_at": "2022-12-11 18:09:24",
+//                 "company_id": "1",
+//                 "name": "test",
+//                 "email": "test@gmail.com",
+//                 "phone": "123456789",
+//                 "password": "123"
+//             },
+//             {
+//                 "id": "1",
+//                 "status": "breakout",
+//                 "is_late": "0",
+//                 "user_id": "1",
+//                 "date": "2023-03-02",
+//                 "time": "22:31:20",
+//                 "created_at": "2022-12-11 18:09:24",
+//                 "company_id": "1",
+//                 "name": "test",
+//                 "email": "test@gmail.com",
+//                 "phone": "123456789",
+//                 "password": "123"
+//             },
+//             {
+//                 "id": "1",
+//                 "status": "checkout",
+//                 "is_late": "0",
+//                 "user_id": "1",
+//                 "date": "2023-03-02",
+//                 "time": "22:31:20",
+//                 "created_at": "2022-12-11 18:09:24",
+//                 "company_id": "1",
+//                 "name": "test",
+//                 "email": "test@gmail.com",
+//                 "phone": "123456789",
+//                 "password": "123"
+//             }
+//         ]},
+//   {
+//     activity_date:"2023-03-02",
+//     activity_list: [
+//             {
+//                 "id": "1",
+//                 "status": "checkin",
+//                 "is_late": "1",
+//                 "user_id": "1",
+//                 "date": "2023-03-01",
+//                 "time": "29:41:23",
+//                 "created_at": "2022-12-11 18:09:24",
+//                 "company_id": "1",
+//                 "name": "test",
+//                 "email": "test@gmail.com",
+//                 "phone": "123456789",
+//                 "password": "123"
+//             },
+//             {
+//                 "id": "1",
+//                 "status": "breakin",
+//                 "is_late": "0",
+//                 "user_id": "1",
+//                 "date": "2023-03-01",
+//                 "time": "29:41:23",
+//                 "created_at": "2022-12-11 18:09:24",
+//                 "company_id": "1",
+//                 "name": "test",
+//                 "email": "test@gmail.com",
+//                 "phone": "123456789",
+//                 "password": "123"
+//             },
+//             {
+//                 "id": "1",
+//                 "status": "breakout",
+//                 "is_late": "1",
+//                 "user_id": "1",
+//                 "date": "2023-03-01",
+//                 "time": "29:41:23",
+//                 "created_at": "2022-12-11 18:09:24",
+//                 "company_id": "1",
+//                 "name": "test",
+//                 "email": "test@gmail.com",
+//                 "phone": "123456789",
+//                 "password": "123"
+//             },
+//             {
+//                 "id": "1",
+//                 "status": "checkout",
+//                 "is_late": "0",
+//                 "user_id": "1",
+//                 "date": "2023-03-01",
+//                 "time": "29:41:23",
+//                 "created_at": "2022-12-11 18:09:24",
+//                 "company_id": "1",
+//                 "name": "test",
+//                 "email": "test@gmail.com",
+//                 "phone": "123456789",
+//                 "password": "123"
+//             }
+//         ]
+//         }
+//     ]

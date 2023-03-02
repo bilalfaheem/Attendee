@@ -23,11 +23,13 @@ class SelectionScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                margin: EdgeInsets.only(top: 50),
-                child: Image.asset("assets/logo/logo.png",height: 250,)),
+                  margin: EdgeInsets.only(top: 50),
+                  child: Image.asset(
+                    "assets/logo/logo.png",
+                    height: 250,
+                  )),
             ],
           ),
-          
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -39,7 +41,7 @@ class SelectionScreen extends StatelessWidget {
                       BoxDecoration(borderRadius: BorderRadius.circular(30)),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary:primaryColorDark,
+                          primary: primaryColorDark,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30))),
                       onPressed: () {

@@ -11,8 +11,8 @@ class MarkAttendenceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: 
-      Column(
+      body: SafeArea(
+          child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -21,10 +21,10 @@ class MarkAttendenceScreen extends StatelessWidget {
                 margin: EdgeInsets.symmetric(vertical: 20),
                 padding: EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                   color: primaryColorLight,
-                  borderRadius: BorderRadius.circular(30)
-                ),
-                child: Image.asset(scanner,height: 100,color:primaryColorDark),
+                    color: primaryColorLight,
+                    borderRadius: BorderRadius.circular(30)),
+                child:
+                    Image.asset(scanner, height: 100, color: primaryColorDark),
               ),
             ],
           ),
@@ -32,8 +32,11 @@ class MarkAttendenceScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                child: Text("Attendence",style: TextStyle(fontSize: 21,fontWeight: FontWeight.w600),),
+                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Text(
+                  "Attendence",
+                  style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
+                ),
               ),
             ],
           ),

@@ -1,3 +1,4 @@
+import 'package:attendees/AddEmployeesScreen/function/add_employee_func.dart';
 import 'package:attendees/EmployeeActivityScreen/view/employee_activity_screen.dart';
 import 'package:attendees/LoginScreen/view/login_screen.dart';
 import 'package:attendees/SignupScreen/provider/signup_password_provider.dart';
@@ -9,10 +10,11 @@ import 'package:provider/provider.dart';
 
 class AddEmployeeScreen extends StatelessWidget {
   AddEmployeeScreen({Key? key}) : super(key: key);
-  GlobalKey<FormState> Sign_Form_Key = GlobalKey<FormState>();
-  TextEditingController Sign_Email_Controller = TextEditingController();
-  TextEditingController Sign_phone_Controller = TextEditingController();
-  TextEditingController Sign_Password_Controller = TextEditingController();
+  GlobalKey<FormState> addFormKey = GlobalKey<FormState>();
+  TextEditingController addNameController = TextEditingController();
+  TextEditingController addEmailController = TextEditingController();
+  TextEditingController addPhoneController = TextEditingController();
+  TextEditingController addPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class AddEmployeeScreen extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Form(
-                key: Sign_Form_Key,
+                key: addFormKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,22 +50,23 @@ class AddEmployeeScreen extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: 20),
                       child: TextFormField(
-                        controller: Sign_Email_Controller,
-                        maxLength: 11,
-                        keyboardType: TextInputType.number,
+                        controller: addNameController,
+                        maxLength: 15,
                         style: TextStyle(
                             fontSize: 18, color: Color.fromARGB(186, 0, 0, 0)),
-                        // inputFormatters: <TextInputFormatter>[
-                        //   FilteringTextInputFormatter.digitsOnly
-                        // ],
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                              RegExp("[a-zA-Z0-9-]"))
+                        ],
                         decoration: new InputDecoration(
-                          hintText: 'Email',
+                          hintText: 'Name',
                           counterText: "",
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 20, vertical: 16),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(color: maroon, width: 2.0),
+                            borderSide:
+                                BorderSide(color: primaryColorDark, width: 2.0),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -85,28 +88,91 @@ class AddEmployeeScreen extends StatelessWidget {
                           // errorStyle: InputDecoration.collapsed(hintText: hintText)
                         ),
                         validator: (value) {
-                          // if (Sign_Api_Validation == false) {
-                          //   if (value == null || value.isEmpty)
-                          //     return "Enter Mobile Number";
-                          //   else if (value.length < 11) {
-                          //     return "Enter Correct Number";
-                          //   } else {
-                          //     return null;
-                          //   }
-                          // } else if (Sign_Api_Validation == true) {
-                          //   if (Sign_Api_Status == "404") {
-                          //     return "Failed";
-                          //   } else if (Sign_Api_Status == "200") {
-                          //     return null;
-                          //   }
-                          // }
+                          if (addApiValidation == false) {
+                            if (value == null || value.isEmpty)
+                              return "Company Name";
+                            else if (value.length < 3) {
+                              return "Company Name";
+                            } else {
+                              return null;
+                            }
+                          } else if (addApiValidation == true) {
+                            if (addApiStatus == "4") {
+                              return "Name Already Exist";
+                            } else if (addApiStatus == "1") {
+                              return null;
+                            }
+                          }
                         },
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 20),
                       child: TextFormField(
-                        controller: Sign_phone_Controller,
+                        controller: addEmailController,
+                        maxLength: 20,
+                        style: TextStyle(
+                            fontSize: 18, color: Color.fromARGB(186, 0, 0, 0)),
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                              RegExp("[a-zA-Z0-9!#@%&*+-/=?^_`{|}~]"))
+                        ],
+                        decoration: new InputDecoration(
+                          hintText: 'Email',
+                          counterText: "",
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 16),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide:
+                                BorderSide(color: primaryColorDark, width: 2.0),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide:
+                                BorderSide(color: highlightGrey, width: 2.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(220, 247, 123, 114),
+                                width: 2.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(220, 247, 123, 114),
+                                width: 2.0),
+                          ),
+                          // errorStyle: InputDecoration.collapsed(hintText: hintText)
+                        ),
+                        validator: (value) {
+                          if (addApiValidation == false) {
+                            if (value == null || value.isEmpty) {
+                              return "Enter Email";
+                            } else if (value.length < 7) {
+                              return "Enter Email";
+                            } else {
+                              return null;
+                            }
+                          } else if (addApiValidation == true) {
+                            if (addApiStatus == "0") {
+                              return "failed";
+                            } else if (addApiStatus == "1") {
+                              return null;
+                            } else if (addApiStatus == "2") {
+                              return "Email Already Exist";
+                            } else {
+                              return null;
+                            }
+                          }
+                        },
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      child: TextFormField(
+                        controller: addPhoneController,
                         maxLength: 11,
                         keyboardType: TextInputType.number,
                         style: TextStyle(
@@ -121,7 +187,8 @@ class AddEmployeeScreen extends StatelessWidget {
                               horizontal: 20, vertical: 16),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(color: maroon, width: 2.0),
+                            borderSide:
+                                BorderSide(color: primaryColorDark, width: 2.0),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -143,21 +210,21 @@ class AddEmployeeScreen extends StatelessWidget {
                           // errorStyle: InputDecoration.collapsed(hintText: hintText)
                         ),
                         validator: (value) {
-                          // if (Sign_Api_Validation == false) {
-                          //   if (value == null || value.isEmpty)
-                          //     return "Enter Mobile Number";
-                          //   else if (value.length < 11) {
-                          //     return "Enter Correct Number";
-                          //   } else {
-                          //     return null;
-                          //   }
-                          // } else if (Sign_Api_Validation == true) {
-                          //   if (Sign_Api_Status == "404") {
-                          //     return "Failed";
-                          //   } else if (Sign_Api_Status == "200") {
-                          //     return null;
-                          //   }
-                          // }
+                          if (addApiValidation == false) {
+                            if (value == null || value.isEmpty)
+                              return "Contact Number";
+                            else if (value.length < 11) {
+                              return "Contact Number";
+                            } else {
+                              return null;
+                            }
+                          } else if (addApiValidation == true) {
+                            if (addApiStatus == "0") {
+                              return "failed";
+                            } else if (addApiStatus == "1") {
+                              return null;
+                            }
+                          }
                         },
                       ),
                     ),
@@ -167,7 +234,7 @@ class AddEmployeeScreen extends StatelessWidget {
                         margin: EdgeInsets.only(top: 20, bottom: 20),
                         child: TextFormField(
                           obscureText: value.visible,
-                          controller: Sign_Password_Controller,
+                          controller: addPasswordController,
                           style: TextStyle(
                               fontSize: 18,
                               color: Color.fromARGB(186, 0, 0, 0)),
@@ -184,7 +251,8 @@ class AddEmployeeScreen extends StatelessWidget {
                                     : Icon(Icons.visibility)),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: maroon, width: 2.0),
+                              borderSide: BorderSide(
+                                  color: primaryColorDark, width: 2.0),
                             ),
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -205,19 +273,22 @@ class AddEmployeeScreen extends StatelessWidget {
                             ),
                           ),
                           validator: (value) {
-                            // if (Sign_Api_Validation == false) {
-                            //   if (value == null || value.isEmpty)
-                            //     return "Enter Password";
-                            //   else {
-                            //     return null;
-                            //   }
-                            // } else if (Sign_Api_Validation == true) {
-                            //   if (Sign_Api_Status == "404") {
-                            //     return "Failed";
-                            //   } else if (Sign_Api_Status == "200") {
-                            //     return null;
-                            //   }
-                            // }
+                            if (addApiValidation == false) {
+                              if (value == null || value.isEmpty)
+                                return "Enter Password";
+                              else if (value.length < 8) {
+                              return "Min length 8";
+                            } 
+                              else {
+                                return null;
+                              }
+                            } else if (addApiValidation == true) {
+                              if (addApiStatus == "0") {
+                                return "failed";
+                              } else if (addApiStatus == "1") {
+                                return null;
+                              }
+                            }
                           },
                         ),
                       );
@@ -236,11 +307,13 @@ class AddEmployeeScreen extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30))),
                             onPressed: () {
-                              Navigator.push(
+                              addEmployeeFunction(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          EmployeeActivityScreen()));
+                                  addFormKey,
+                                  addNameController.text.toString(),
+                                  addEmailController.text.toString(),
+                                  addPhoneController.text.toString(),
+                                  addPasswordController.text.toString());
                             },
                             child: Padding(
                               padding: EdgeInsets.symmetric(

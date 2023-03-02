@@ -1,3 +1,4 @@
+import 'package:attendees/LoginScreen/function/login_func.dart';
 import 'package:attendees/LoginScreen/provider/login_password_provider.dart';
 import 'package:attendees/NavBarScreen/view/navbar_screen.dart';
 import 'package:attendees/NavBarScreen/view/office_navbar_screen.dart';
@@ -13,9 +14,9 @@ import 'package:provider/provider.dart';
 class LoginScreen extends StatelessWidget {
   bool company;
   LoginScreen({required this.company});
-  GlobalKey<FormState> Login_Form_Key = GlobalKey<FormState>();
-  TextEditingController Login_phone_Controller = TextEditingController();
-  TextEditingController Login_Password_Controller = TextEditingController();
+  GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  TextEditingController loginEmailController = TextEditingController();
+  TextEditingController loginPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +26,15 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(vertical: 50),
-              child: Image.asset(logo,height: 250,)),
+                margin: EdgeInsets.symmetric(vertical: 50),
+                child: Image.asset(
+                  logo,
+                  height: 250,
+                )),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Form(
-                key: Login_Form_Key,
+                key: loginFormKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -39,22 +43,24 @@ class LoginScreen extends StatelessWidget {
                       height: 35,
                     ),
                     TextFormField(
-                      controller: Login_phone_Controller,
-                      maxLength: 11,
+                      controller: loginEmailController,
+                      // maxLength: 11,
                       keyboardType: TextInputType.number,
                       style: TextStyle(
                           fontSize: 18, color: Color.fromARGB(186, 0, 0, 0)),
                       inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
+                        FilteringTextInputFormatter.allow(
+                            RegExp("[a-zA-Z0-9!#@%&*+-/=?^_`{|}~]"))
                       ],
                       decoration: new InputDecoration(
-                        hintText: 'Mobile Number',
+                        hintText: 'Email',
                         counterText: "",
                         contentPadding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: maroon, width: 2.0),
+                          borderSide:
+                              BorderSide(color: primaryColorDark, width: 2.0),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -76,21 +82,23 @@ class LoginScreen extends StatelessWidget {
                         // errorStyle: InputDecoration.collapsed(hintText: hintText)
                       ),
                       validator: (value) {
-                        // if (Login_Api_Validation == false) {
-                        //   if (value == null || value.isEmpty)
-                        //     return "Enter Mobile Number";
-                        //   else if (value.length < 11) {
-                        //     return "Enter Correct Number";
-                        //   } else {
-                        //     return null;
-                        //   }
-                        // } else if (Login_Api_Validation == true) {
-                        //   if (Login_Api_Status == "404") {
-                        //     return "Failed";
-                        //   } else if (Login_Api_Status == "200") {
-                        //     return null;
-                        //   }
-                        // }
+                        if (loginApiValidation == false) {
+                          if (value == null || value.isEmpty) {
+                            return "Enter Email";
+                          } else if (value.length < 7) {
+                            return "Enter Email";
+                          } else {
+                            return null;
+                          }
+                        } else if (loginApiValidation == true) {
+                          if (loginApiStatus == "0") {
+                            return "failed";
+                          } else if (loginApiStatus == "1") {
+                            return null;
+                          } else {
+                            return "Failed";
+                          }
+                        }
                       },
                     ),
                     Consumer<LoginPasswordVisibilityProvider>(
@@ -99,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                         margin: EdgeInsets.only(top: 30, bottom: 20),
                         child: TextFormField(
                           obscureText: value.visible,
-                          controller: Login_Password_Controller,
+                          controller: loginPasswordController,
                           style: TextStyle(
                               fontSize: 18,
                               color: Color.fromARGB(186, 0, 0, 0)),
@@ -116,7 +124,8 @@ class LoginScreen extends StatelessWidget {
                                     : Icon(Icons.visibility)),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: maroon, width: 2.0),
+                              borderSide: BorderSide(
+                                  color: primaryColorDark, width: 2.0),
                             ),
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -137,19 +146,23 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           validator: (value) {
-                            // if (Login_Api_Validation == false) {
-                            //   if (value == null || value.isEmpty)
-                            //     return "Enter Password";
-                            //   else {
-                            //     return null;
-                            //   }
-                            // } else if (Login_Api_Validation == true) {
-                            //   if (Login_Api_Status == "404") {
-                            //     return "Failed";
-                            //   } else if (Login_Api_Status == "200") {
-                            //     return null;
-                            //   }
-                            // }
+                            if (loginApiValidation == false) {
+                              if (value == null || value.isEmpty) {
+                                return "Enter Password";
+                              } else if (value.length < 3) {
+                                return "Enter Password";
+                              } else {
+                                return null;
+                              }
+                            } else if (loginApiValidation == true) {
+                              if (loginApiStatus == "0") {
+                                return "failed";
+                              } else if (loginApiStatus == "1") {
+                                return null;
+                              } else {
+                                return "Failed";
+                              }
+                            }
                           },
                         ),
                       );
@@ -162,9 +175,8 @@ class LoginScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   "Create an account  ",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: greyColor),
+                                  style:
+                                      TextStyle(fontSize: 18, color: greyColor),
                                 ),
                                 GestureDetector(
                                   onTap: () {
@@ -172,7 +184,7 @@ class LoginScreen extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                OfficeNavBarScreen()));
+                                                SignupScreen()));
                                   },
                                   child: Text(
                                     "SignUp",
@@ -195,22 +207,23 @@ class LoginScreen extends StatelessWidget {
                       //     colors: [itemGradient2, itemGradient1])),
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary:primaryColorDark,
+                              primary: primaryColorDark,
                               // shadowColor: Colors.transparent,
                               // onPrimary: itemGradient1Light,
                               // animationDuration: defaultAnimationDelay,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30))),
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => NavBarScreen()));
-                            // Login_Api_Func(
+                            // Navigator.push(
                             //     context,
-                            //     Login_Form_Key,
-                            //     Login_phone_Controller.text.toString(),
-                            //     Login_Password_Controller.text.toString());
+                            //     MaterialPageRoute(
+                            //         builder: (context) => NavBarScreen()));
+                            loginFunction(
+                                context,
+                                loginFormKey,
+                                loginEmailController.text.toString(),
+                                company ? "company" : "employee",
+                                loginPasswordController.text.toString());
                           },
                           child: Padding(
                             padding: EdgeInsets.all(14),

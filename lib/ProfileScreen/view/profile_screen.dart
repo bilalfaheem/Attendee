@@ -29,7 +29,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   attendeesType == "company"?Container():
                   ProfileTile(profile, attendeesName),
-                  ProfileTile(office, attendeesName),
+                  ProfileTile(office, attendeesCompany),
                   ProfileTile(email, attendeesEmail),
                   ProfileTile(phone, attendeesPhone)
                 ],

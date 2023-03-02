@@ -6,3 +6,4 @@ String attendeesPhone = "null";
 String attendeesEmail = "null";
 String attendeesQr = "null";
 String attendeesType = "null";
+String attendeesCompany = "null";

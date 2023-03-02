@@ -71,12 +71,14 @@ class EmployeeDetailScreen extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+            // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: EdgeInsets.fromLTRB(20, 20, 5, 20),
             decoration: BoxDecoration(
               color: primaryColorLight,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,7 +107,7 @@ class EmployeeDetailScreen extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: EdgeInsets.symmetric(horizontal: 5),
                   child: Column(
                     children: [
                       Text(
@@ -144,6 +146,7 @@ class EmployeeDetailScreen extends StatelessWidget {
                     ),
                     Text(
                       "$email",
+                      overflow: TextOverflow.clip,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -154,15 +157,15 @@ class EmployeeDetailScreen extends StatelessWidget {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          value.visible
-                              ? Text(
-                                  "$password",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                  ),
-                                )
-                              : Text(""),
+                          // value.visible
+                          //     ? Text(
+                          //         "$password",
+                          //         style: TextStyle(
+                          //           color: Colors.black,
+                          //           fontSize: 20,
+                          //         ),
+                          //       )
+                          //     : Text(""),
                           GestureDetector(
                               onTap: () {
                                 value.visibiltyFunc();

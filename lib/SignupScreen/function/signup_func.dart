@@ -50,7 +50,8 @@ Future<void> signupFunction(
             data["response"]["phone"].toString(),
             data["response"]["email"].toString(),
             data["response"]["qr_code"].toString(),
-            "company");
+            "company",
+            "null");
 
         // loginFunc(
         //     data.first["response"]["id"].toString(),

@@ -49,7 +49,9 @@ Future<void> loginFunction(
             data["response"]["phone"].toString(),
             data["response"]["email"].toString(),
             data["response"]["qr_code"].toString(),
-            data["response"]["user_type"].toString());
+            data["response"]["user_type"].toString(),
+            data["response"]["company"].toString()
+            );
         // loginFunc(
         //     data.first["response"]["id"].toString(),
         //     data.first["response"]["name"].toString(),

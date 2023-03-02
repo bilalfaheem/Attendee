@@ -11,6 +11,7 @@ sharedFunc() async {
   attendeesEmail = pref.getString("attendeesEmail").toString();
   attendeesQr = pref.getString("attendeesQr").toString();
   attendeesType = pref.getString("attendeesType").toString();
+  attendeesCompany = pref.getString("attendeesCompany").toString();
   print(attendeesId +
       attendeesName +
       attendeesPhone +

@@ -295,7 +295,7 @@ class AddEmployeeScreen extends StatelessWidget {
                     }),
                     Center(
                       child: Container(
-                        margin: EdgeInsets.only(top: 30),
+                        margin: EdgeInsets.only(top: 30,bottom: 40),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30)),
                         child: ElevatedButton(

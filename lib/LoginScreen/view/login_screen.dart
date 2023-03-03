@@ -45,7 +45,6 @@ class LoginScreen extends StatelessWidget {
                     TextFormField(
                       controller: loginEmailController,
                       // maxLength: 11,
-                      keyboardType: TextInputType.number,
                       style: TextStyle(
                           fontSize: 18, color: Color.fromARGB(186, 0, 0, 0)),
                       inputFormatters: <TextInputFormatter>[

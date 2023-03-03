@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
         ],
         child: Builder(builder: (BuildContext context) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             theme: ThemeData(fontFamily: GoogleFonts.nunito().fontFamily),
             home: attendeesType == "company"
                 ? OfficeNavBarScreen()

@@ -1,5 +1,10 @@
+import 'package:attendees/EmployeeActivityScreen/utils/employee_activity_widget.dart';
+import 'package:attendees/EmployeeDetailScreen/function/employee_activity_func.dart';
+import 'package:attendees/MarkAttendenceScreen/function/mark_attendence_func.dart';
 import 'package:attendees/MarkAttendenceScreen/utils/markattendence_tile.dart';
+import 'package:attendees/MarkAttendenceScreen/utils/success_alert_widget.dart';
 import 'package:attendees/Utils/colors.dart';
+import 'package:attendees/Utils/constant.dart';
 import 'package:attendees/Utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,6 +28,8 @@ class _MarkAttendenceScreenState extends State<MarkAttendenceScreen> {
           '#004b99', 'Cancel', true, ScanMode.QR);
       if (barcodeScanRes != "-1") {
         print("qr scanned");
+        final mark = await markAttendenceFunc(attendeesId, barcodeScanRes);
+        successAlert(context, mark);
         // scanApiFunc(context, barcodeScanRes.toString());
         // ScanApiFunc(context, barcodeScanRes.toString(),
         //     Credential_List.first.response!.walletId.toString());
@@ -76,17 +83,60 @@ class _MarkAttendenceScreenState extends State<MarkAttendenceScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Text(
-                  "Attendence",
-                  style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  child: Text(
+                    "Attendence",
+                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
+                  ),
                 ),
               ),
             ],
           ),
-          MarkAttendenceTile(true),
-          MarkAttendenceTile(false)
+          FutureBuilder(
+              future: getEmployeeActivityFunc(
+                  "my_activity", "user_id", attendeesId),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 200,
+                      ),
+                      Center(
+                          child: CircularProgressIndicator(
+                        strokeWidth: 1.5,
+                        color: primaryColorDark,
+                      ))
+                    ],
+                  );
+                } else if (snapshot.hasData) {
+                  return Column(children: [
+                    ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: employeeActivityList.length,
+                        reverse: true,
+                        // detailList.reviews?.length,
+                        itemBuilder: (BuildContext context, int i) {
+                          return employeeActivityWidget(
+                              false,
+                              attendeesName,
+                              employeeActivityList[i].activityDate.toString(),
+                              employeeActivityList[i].activityList);
+                          // Text(
+                          //     allActivityList[i].activityDate.toString());
+                        }),
+                  ]);
+                } else {
+                  return Container();
+                }
+              }),
         ],
       )),
     );

@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:attendees/Utils/Models/all_employee/all_employee.dart';
+import 'package:attendees/Utils/Models/all_employee_q/all_employee_q.dart';
 import 'package:attendees/Utils/constant.dart';
 import 'package:http/http.dart' as https;
 
-List<AllEmployee> allEmployeeList = [];
+List<AllEmployeeQ> allEmployeeList = [];
 
 Future<List> getAllEmployee() async {
   final response = await https.post(
@@ -18,7 +19,7 @@ Future<List> getAllEmployee() async {
       allEmployeeList.clear();
       var dataResponse = data["response"];
       for (Map i in dataResponse) {
-        allEmployeeList.add(AllEmployee.fromJson(i));
+        allEmployeeList.add(AllEmployeeQ.fromJson(i));
       }
     } else {
       allEmployeeList.clear();

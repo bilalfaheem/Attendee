@@ -47,7 +47,8 @@ class EmployeeScreen extends StatelessWidget {
                                     padding: EdgeInsets.zero,
                                     primary: primaryColorDark,
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30))),
+                                        borderRadius:
+                                            BorderRadius.circular(30))),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -117,8 +118,7 @@ class EmployeeScreen extends StatelessWidget {
                       ],
                     );
                   } else if (snapshot.hasData) {
-                    return Column(
-                      children: [
+                    return Column(children: [
                       allEmployeeList.length == 0
                           ? Container(
                               margin: EdgeInsets.symmetric(
@@ -135,16 +135,23 @@ class EmployeeScreen extends StatelessWidget {
                             )
                           : ListView.builder(
                               padding: EdgeInsets.zero,
-                               physics: NeverScrollableScrollPhysics(),
+                              physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: allEmployeeList.length,
                               reverse: true,
                               // detailList.reviews?.length,
                               itemBuilder: (BuildContext context, int i) {
                                 return employeeTile(
-                                    context, allEmployeeList[i].name.toString(), allEmployeeList[i].email.toString(), allEmployeeList[i].password.toString());
+                                    context,
+                                    allEmployeeList[i].name.toString(),
+                                    allEmployeeList[i].email.toString(),
+                                    allEmployeeList[i].password.toString(),
+                                    allEmployeeList[i].employeeId.toString()
+                                        .toString());
                               }),
-                              SizedBox(height: 110,)
+                      SizedBox(
+                        height: 110,
+                      )
                     ]);
                   } else {
                     return Container();

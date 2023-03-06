@@ -277,9 +277,8 @@ class AddEmployeeScreen extends StatelessWidget {
                               if (value == null || value.isEmpty)
                                 return "Enter Password";
                               else if (value.length < 8) {
-                              return "Min length 8";
-                            } 
-                              else {
+                                return "Min length 8";
+                              } else {
                                 return null;
                               }
                             } else if (addApiValidation == true) {
@@ -295,7 +294,7 @@ class AddEmployeeScreen extends StatelessWidget {
                     }),
                     Center(
                       child: Container(
-                        margin: EdgeInsets.only(top: 30,bottom: 40),
+                        margin: EdgeInsets.only(top: 30, bottom: 40),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30)),
                         child: ElevatedButton(

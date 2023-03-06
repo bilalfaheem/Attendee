@@ -4,14 +4,19 @@ import 'package:attendees/Utils/images.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget employeeTile(context, String name,String email,String password) {
+Widget employeeTile(
+    context, String name, String email, String password, String id_employee) {
   return GestureDetector(
     onTap: () {
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => EmployeeDetailScreen(
-                  name: name, email: email, password: password)));
+                    name: name,
+                    email: email,
+                    password: password,
+                    id: id_employee,
+                  )));
     },
     child: Container(
       margin: EdgeInsets.only(right: 15, left: 15, bottom: 10),

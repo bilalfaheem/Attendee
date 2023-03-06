@@ -27,9 +27,14 @@ class ProfileScreen extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 30),
               child: Column(
                 children: [
-                  attendeesType == "company"?Container():
-                  ProfileTile(profile, attendeesName),
-                  ProfileTile(office,attendeesType == "company"?attendeesName: attendeesCompany),
+                  attendeesType == "company"
+                      ? Container()
+                      : ProfileTile(profile, attendeesName),
+                  ProfileTile(
+                      office,
+                      attendeesType == "company"
+                          ? attendeesName
+                          : attendeesCompany),
                   ProfileTile(email, attendeesEmail),
                   ProfileTile(phone, attendeesPhone)
                 ],

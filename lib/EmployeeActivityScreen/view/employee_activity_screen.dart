@@ -1,4 +1,6 @@
+import 'package:attendees/EmployeeActivityScreen/function/all_activity_func.dart';
 import 'package:attendees/EmployeeActivityScreen/utils/employee_activity_tile.dart';
+import 'package:attendees/EmployeeActivityScreen/utils/employee_activity_widget.dart';
 import 'package:attendees/MarkAttendenceScreen/utils/markattendence_tile.dart';
 import 'package:attendees/QrScreen/view/qr_screen.dart';
 import 'package:attendees/Utils/colors.dart';
@@ -24,11 +26,13 @@ class EmployeeActivityScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
+                      print(attendeesQr);
+                      print(attendeesId);
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => QrScreen()));
                     },
                     child: Container(
-                      margin: EdgeInsets.only(top: 20,bottom: 7),
+                      margin: EdgeInsets.only(top: 20, bottom: 7),
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
                           color: primaryColorLight,
@@ -42,49 +46,46 @@ class EmployeeActivityScreen extends StatelessWidget {
                         roundEdges: true,
                       ),
                     ),
-                    
                   ),
                   Center(
-                      child: Container(
-                        // margin: EdgeInsets.only(top: 30),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30)),
-                        child: ElevatedButton(
-                          
-                            style: ElevatedButton.styleFrom(
+                    child: Container(
+                      // margin: EdgeInsets.only(top: 30),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30)),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.zero,
-                                primary: primaryColorDark,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30))),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          QrScreen()));
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 27),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text("  Qr  ",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white)),
-                                          // Container(
-                                          //   decoration: BoxDecoration(
-                                          //     color: primaryColorLight,
-                                          //     shape: BoxShape.circle,
-                                          //   ),child: Center(child: Icon(Icons.add,color: primaryColorDark,)),
-                                          // )
-                                ],
-                              ),
-                            )),
-                      ),
-                    )
+                              primary: primaryColorDark,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30))),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => QrScreen()));
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 27),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text("  Qr  ",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white)),
+                                // Container(
+                                //   decoration: BoxDecoration(
+                                //     color: primaryColorLight,
+                                //     shape: BoxShape.circle,
+                                //   ),child: Center(child: Icon(Icons.add,color: primaryColorDark,)),
+                                // )
+                              ],
+                            ),
+                          )),
+                    ),
+                  )
                 ],
               ),
             ],
@@ -101,71 +102,54 @@ class EmployeeActivityScreen extends StatelessWidget {
               ),
             ],
           ),
-          
-          employeeActivityTile(true),
-          // FutureBuilder(
-          //                 future: getReview(detailList.id.toString()),
-          //                 builder: (context, snapshot) {
-          //                   if (snapshot.connectionState ==
-          //                       ConnectionState.waiting) {
-          //                     return Column(
-          //                       mainAxisAlignment: MainAxisAlignment.center,
-          //                       crossAxisAlignment: CrossAxisAlignment.center,
-          //                       children: [
-          //                         SizedBox(
-          //                           height: 200,
-          //                         ),
-          //                         Center(
-          //                             child: CircularProgressIndicator(
-          //                           strokeWidth: 1.5,
-          //                           color: primaryColorDark,
-          //                         ))
-          //                       ],
-          //                     );
-          //                   } else if (snapshot.hasData) {
-          //                     return Column(children: [
-          //                       totalRating == null
-          //                           ? Container(
-          //                               margin: EdgeInsets.symmetric(
-          //                                   vertical: 20, horizontal: 10),
-          //                               padding: EdgeInsets.symmetric(
-          //                                   vertical: 18, horizontal: 20),
-          //                               decoration: BoxDecoration(
-          //                                   borderRadius:
-          //                                       BorderRadius.circular(25),
-          //                                   color: primaryColorDark),
-          //                               child: Text("No Review Yet",
-          //                                   style: TextStyle(
-          //                                       // fontSize: constraints.maxHeight * 0.09,
-          //                                       color: greyTextColor)),
-          //                             )
-          //                           : ratingCard(
-          //                               size, totalRating, reviewList.length),
-          //                       ListView.builder(
-          //                           padding: EdgeInsets.zero,
-          //                           physics: NeverScrollableScrollPhysics(),
-          //                           shrinkWrap: true,
-          //                           itemCount: reviewList.length,
-          //                           reverse: true,
-          //                           // detailList.reviews?.length,
-          //                           itemBuilder: (BuildContext context, int i) {
-          //                             return reviewCard(
-          //                                 size,
-          //                                 reviewList[i].name,
-          //                                 reviewList[i].rating,
-          //                                 reviewList[i].text);
-          //                           }),
-          //                     ]);
-          //                   } else {
-          //                     return Container();
-          //                   }
-          //                 }),
+          // employeeActivityTile(true),
+          FutureBuilder(
+              future:
+                  getAllActivityFunc("all_activity", "company_id", attendeesId),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 200,
+                      ),
+                      Center(
+                          child: CircularProgressIndicator(
+                        strokeWidth: 1.5,
+                        color: primaryColorDark,
+                      ))
+                    ],
+                  );
+                } else if (snapshot.hasData) {
+                  return Column(children: [
+                    ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: allActivityList.length,
+                        reverse: true,
+                        // detailList.reviews?.length,
+                        itemBuilder: (BuildContext context, int i) {
+                          return employeeActivityWidget(
+                              true,
+                              "",
+                              allActivityList[i].activityDate.toString(),
+                              allActivityList[i].activityList);
+                          // Text(
+                          //     allActivityList[i].activityDate.toString());
+                        }),
+                  ]);
+                } else {
+                  return Container();
+                }
+              }),
         ],
       )),
     );
   }
 }
-
 
 // [
 //   {

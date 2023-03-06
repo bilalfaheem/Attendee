@@ -1,4 +1,7 @@
+import 'package:attendees/EmployeeActivityScreen/utils/employee_activity_widget.dart';
+import 'package:attendees/EmployeeDetailScreen/function/employee_activity_func.dart';
 import 'package:attendees/EmployeeDetailScreen/provider/employee_detail_provider.dart';
+import 'package:attendees/EmployeeActivityScreen/function/all_activity_func.dart';
 import 'package:attendees/QrScreen/view/qr_screen.dart';
 import 'package:attendees/Utils/colors.dart';
 import 'package:attendees/Utils/images.dart';
@@ -6,9 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EmployeeDetailScreen extends StatelessWidget {
-  String name, email, password;
+  String name, email, password, id;
   EmployeeDetailScreen(
-      {required this.name, required this.email, required this.password});
+      {required this.name,
+      required this.email,
+      required this.password,
+      required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -202,6 +208,47 @@ class EmployeeDetailScreen extends StatelessWidget {
               ),
             ],
           ),
+          FutureBuilder(
+              future: getEmployeeActivityFunc("my_activity", "user_id", id),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 200,
+                      ),
+                      Center(
+                          child: CircularProgressIndicator(
+                        strokeWidth: 1.5,
+                        color: primaryColorDark,
+                      ))
+                    ],
+                  );
+                } else if (snapshot.hasData) {
+                  return Column(children: [
+                    ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: employeeActivityList.length,
+                        reverse: true,
+                        // detailList.reviews?.length,
+                        itemBuilder: (BuildContext context, int i) {
+                          return employeeActivityWidget(
+                              false,
+                              name,
+                              employeeActivityList[i].activityDate.toString(),
+                              employeeActivityList[i].activityList);
+                          // Text(
+                          //     allActivityList[i].activityDate.toString());
+                        }),
+                  ]);
+                } else {
+                  return Container();
+                }
+              }),
           // employeeTile("Ahsan Junaid")
         ],
       )),

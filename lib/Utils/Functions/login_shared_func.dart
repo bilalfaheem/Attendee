@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void loginSharedFunc(String id, String name, String phone, String email,
-    String qr, String type,String company) async {
+    String qr, String type, String company) async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences pref = await SharedPreferences.getInstance();
   pref.setString("attendeesId", id);

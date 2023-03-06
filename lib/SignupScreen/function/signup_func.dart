@@ -11,8 +11,8 @@ import 'package:http/http.dart';
 bool signupApiValidation = false;
 String signupApiStatus = "c";
 
-Future<void> signupFunction(
-    context, signupFormKey,String name, String email, String phone, String password) async {
+Future<void> signupFunction(context, signupFormKey, String name, String email,
+    String phone, String password) async {
   signupApiValidation = false;
   if (signupFormKey.currentState!.validate()) {
     final response = await post(Uri.parse('${baseAddress}signup.php'), body: {
@@ -64,8 +64,7 @@ Future<void> signupFunction(
               "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Successful login>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(
-                  builder: (context) =>OfficeNavBarScreen()),
+              MaterialPageRoute(builder: (context) => OfficeNavBarScreen()),
               ((route) => false));
         });
       } else if (signupDataStatus == "0") {

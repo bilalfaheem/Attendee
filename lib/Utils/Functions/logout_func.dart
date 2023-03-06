@@ -14,7 +14,7 @@ logoutFunc(context) async {
   attendeesEmail = "null";
   attendeesQr = "null";
   attendeesType = "null";
-   attendeesCompany = "null";
+  attendeesCompany = "null";
 
   Timer(
       Duration(milliseconds: 500),

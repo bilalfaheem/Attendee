@@ -2,8 +2,10 @@ import 'package:attendees/Utils/colors.dart';
 import 'package:attendees/Utils/images.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-Widget employeeActivityTile(bool checkIn) {
+Widget employeeActivityTile(
+    bool checkIn, String name, String status, String date) {
   return Container(
     margin: EdgeInsets.only(right: 15, left: 15, bottom: 10),
     padding: EdgeInsets.only(right: 20),
@@ -27,11 +29,11 @@ Widget employeeActivityTile(bool checkIn) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Ahsan junaid",
+                  name,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                 ),
                 Text(
-                  "Check out",
+                  status,
                   style: TextStyle(fontSize: 16),
                 ),
               ],
@@ -42,7 +44,7 @@ Widget employeeActivityTile(bool checkIn) {
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "12:03 Pm",
+              DateFormat('hh:mm a').format(DateTime.parse(date)),
               style: TextStyle(fontSize: 15),
             ),
           ],
